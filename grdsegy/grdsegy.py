@@ -1,4 +1,4 @@
-import memdataset
+from grdsegy import memdataset
 import array
 from datetime import datetime
 
@@ -247,7 +247,7 @@ def grd_to_memdataset(fh):
                                 
     return mds
     
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description="Reads in a Surfer GRD file and creates a SEGY file with corresponding traces")
     parser.add_argument('-i', '--infile', dest='infile', required=True, help='Input GRD file name')
     parser.add_argument('-o', '--outfile', dest='outfile', required=True, help='Output filename (segy)')
@@ -258,3 +258,7 @@ if __name__ == '__main__':
     
     with open(args.outfile, 'wb') as ofh:
         segpy.writer.write_segy(ofh, mds)
+
+
+if __name__ == '__main__':
+    main()
