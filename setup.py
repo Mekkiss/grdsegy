@@ -1,6 +1,6 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
-setup(name=grdsegy,
+setup(name='grdsegy',
       version='1.0',
       description='SEGY creator from Surfer GRD files',
       author='Terra Australis Geophysica',
@@ -10,9 +10,9 @@ setup(name=grdsegy,
       install_requires=[
          'segpy'
       ],
-      packages=find_packages(),
+      packages=['grdsegy'],
       entry_points={
         'console_scripts': [
-        'grdsegy = grdsegy.grdsegy.main',
+        'grdsegy = grdsegy.grdsegy:main',
         ],
     },)

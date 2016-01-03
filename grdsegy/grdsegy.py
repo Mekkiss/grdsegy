@@ -1,4 +1,4 @@
-import memdataset
+from grdsegy import memdataset
 import array
 from datetime import datetime
 
@@ -10,15 +10,15 @@ from segpy.trace_header import TraceHeaderRev1
 
 import argparse
 
-
+# TODO: Perhaps make the header less hard-coded
 TEXTUAL_REEL_HEADER = \
-('C 1 Instrument:Seistronix EX-6 (Rev:2.54)                                       ',
+('C 1 Instrument:grdsegy by Terra Australis Geophysica                            ',
  'C 2 Serial #:                                                                   ',
- 'C 3 Manufacturer: Seistronix                                                    ',
- 'C 4 Recording format: SEGY (Rev 0)                                              ',
+ 'C 3 Manufacturer: Terra Australis Geophysica Pty Ltd                            ',
+ 'C 4 Recording format: SEGY (Rev 1)                                              ',
  'C 5 Sample format: MS-DOS IEE Floating Point; Little Endian; ASCII              ',
  'C 6 Gain Type: Fixed                                                            ',
- 'C 7 DataBase File:valj0001.sgy                                                  ',
+ 'C 7 DataBase File:                                                              ',
  'C 8 Reel #:                                                                     ',
  'C 9 Media Type:                                                                 ',
  'C10 Filters: Low cut: 3Hz   High cut: 825 Hz                                    ',
@@ -247,7 +247,7 @@ def grd_to_memdataset(fh):
                                 
     return mds
     
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description="Reads in a Surfer GRD file and creates a SEGY file with corresponding traces")
     parser.add_argument('-i', '--infile', dest='infile', required=True, help='Input GRD file name')
     parser.add_argument('-o', '--outfile', dest='outfile', required=True, help='Output filename (segy)')
@@ -258,3 +258,7 @@ if __name__ == '__main__':
     
     with open(args.outfile, 'wb') as ofh:
         segpy.writer.write_segy(ofh, mds)
+
+
+if __name__ == '__main__':
+    main()
